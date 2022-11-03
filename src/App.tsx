@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import "./App.css";
+
+const menus = ["메뉴1", "메뉴2", "메뉴3", "메뉴4", "메뉴5", "메뉴6", "메뉴7"];
 
 function App() {
+  const constraintsRef = useRef(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="example-container">
+      <motion.div className="drag-area" ref={constraintsRef} />
+      <motion.div
+        className="drag-item"
+        drag="x"
+        dragConstraints={constraintsRef}
+      >
+        <ul>
+          {menus.map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+        </ul>
+      </motion.div>
     </div>
   );
 }
